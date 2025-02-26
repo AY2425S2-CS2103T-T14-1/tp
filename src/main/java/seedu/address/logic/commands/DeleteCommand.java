@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -25,10 +26,10 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    private final List<Index> targetIndices;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(List<Index> targetIndices) {
+        this.targetIndices = targetIndices;
     }
 
     @Override
@@ -36,13 +37,24 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        for (Index index : targetIndices) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        List<Person> personsToDelete = targetIndices.stream()
+                .map(targetIndex -> lastShownList.get(targetIndex.getZeroBased()))
+                .toList();
+
+        for (Person personToDelete : personsToDelete) {
+            model.deletePerson(personToDelete);
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+                personsToDelete.stream()
+                                .map(Messages::format)
+                                .collect(Collectors.joining(", "))));
     }
 
     @Override
@@ -57,13 +69,13 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return targetIndices.equals(otherDeleteCommand.targetIndices);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetIndex", targetIndices)
                 .toString();
     }
 }
