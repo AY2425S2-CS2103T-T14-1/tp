@@ -19,6 +19,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_REMARK_NOT_IMPLEMENTED = "Remark not implemented";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
