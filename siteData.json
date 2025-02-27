@@ -11,7 +11,8 @@
         "jane-doe": "Jane Doe",
         "muhammad-a-qil": "Muhammad A'qil",
         "jean-doe": "Jean Doe",
-        "benjamin-wang": "Benjamin Wang"
+        "benjamin-wang": "Benjamin Wang",
+        "abdul-hakam-bin-nor-razak": "Abdul Hakam Bin Nor Razak"
       },
       "headingKeywords": {}
     },
@@ -132,6 +133,14 @@
       "title": "",
       "headings": {
         "addressbook-level-3": "AddressBook Level-3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/adoubleb.md",
+      "title": "John Doe's Project Portfolio Page",
+      "headings": {
+        "project-addressbook-level-3": "Project: AddressBook Level 3"
       },
       "headingKeywords": {}
     },
