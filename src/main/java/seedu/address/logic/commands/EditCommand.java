@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -22,6 +23,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -43,7 +45,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_COMMENT + "COMMENT]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -100,8 +103,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Comment updatedComment = editPersonDescriptor.getComment().orElse(personToEdit.getComment());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedComment);
     }
 
     @Override
@@ -138,6 +142,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Comment comment;
 
         public EditPersonDescriptor() {}
 
@@ -151,6 +156,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setComment(toCopy.comment);
         }
 
         /**
@@ -190,6 +196,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setComment(Comment comment) {
+            this.comment = comment;
+        }
+
+        public Optional<Comment> getComment() {
+            return Optional.ofNullable(comment);
         }
 
         /**
@@ -236,6 +250,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("comment", comment)
                     .toString();
         }
     }

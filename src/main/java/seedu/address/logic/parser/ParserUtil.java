@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Comment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,6 +94,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String note} into a {@code Comment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code note} is invalid.
+     */
+    public static Comment parseComment(String note) throws ParseException {
+        requireNonNull(note);
+        String trimmedNote = note.trim();
+        if (!Comment.isValidComment(trimmedNote)) {
+            throw new ParseException(Comment.MESSAGE_CONSTRAINTS);
+        }
+        return new Comment(trimmedNote);
     }
 
     /**
