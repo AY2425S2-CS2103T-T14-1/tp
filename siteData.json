@@ -9,9 +9,11 @@
         "project-team": "Project team",
         "yashvan-alagirisamy": "Yashvan Alagirisamy",
         "jane-doe": "Jane Doe",
-        "johnny-doe": "Johnny Doe",
+        "muhammad-a-qil": "Muhammad A'qil",
         "jean-doe": "Jean Doe",
-        "benjamin-wang": "Benjamin Wang"
+        "benjamin-wang": "Benjamin Wang",
+        "abdul-hakam-bin-nor-razak": "Abdul Hakam Bin Nor Razak",
+        "tok-jun-hui-nicholas": "Tok Jun Hui Nicholas"
       },
       "headingKeywords": {}
     },
@@ -136,6 +138,14 @@
       "headingKeywords": {}
     },
     {
+      "src": "team/adoubleb.md",
+      "title": "John Doe's Project Portfolio Page",
+      "headings": {
+        "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
       "src": "team/benjam11n.md",
       "title": "John Doe's Project Portfolio Page",
       "headings": {
@@ -145,6 +155,22 @@
     },
     {
       "src": "team/johndoe.md",
+      "title": "John Doe's Project Portfolio Page",
+      "headings": {
+        "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/nictok.md",
+      "title": "John Doe's Project Portfolio Page",
+      "headings": {
+        "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/qilstiano.md",
       "title": "John Doe's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
