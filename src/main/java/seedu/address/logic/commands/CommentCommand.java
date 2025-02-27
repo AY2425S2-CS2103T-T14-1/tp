@@ -37,9 +37,9 @@ public class CommentCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing comment will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "r/ [COMMENT]\n"
+            + "c/ [COMMENT]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "r/ Likes to play basketball.";
+            + "c/ Likes to play basketball.";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET =
             "Comment command not implemented yet";
