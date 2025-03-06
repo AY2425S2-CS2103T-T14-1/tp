@@ -7,11 +7,11 @@
       "headings": {
         "about-us": "About Us",
         "project-team": "Project team",
-        "yashvan-alagirisamy": "Yashvan Alagirisamy",
-        "muhammad-a-qil": "Muhammad A'qil",
-        "benjamin-wang": "Benjamin Wang",
-        "abdul-hakam-bin-nor-razak": "Abdul Hakam Bin Nor Razak",
-        "tok-jun-hui-nicholas": "Tok Jun Hui Nicholas"
+        "yashvan-alagirisamy-alagirisamyyashvan-gmail-com": "Yashvan Alagirisamy |alagirisamyyashvan@gmail.com",
+        "muhammad-a-qil-qilstianooo-gmail-com": "Muhammad A'qil |qilstianooo@gmail.com",
+        "benjamin-wang-ben-wang9000-gmail-com": "Benjamin Wang |ben.wang9000@gmail.com",
+        "abdul-hakam-bin-nor-razak-abdulhakamnr-gmail-com": "Abdul Hakam Bin Nor Razak |abdulhakamnr@gmail.com",
+        "tok-jun-hui-nicholas-nicholastok0101-gmail-com": "Tok Jun Hui Nicholas |nicholastok0101@gmail.com"
       },
       "headingKeywords": {}
     },
@@ -39,7 +39,7 @@
     {
       "src": "DeveloperGuide.md",
       "headings": {
-        "who-are-you-again-developer-guide": "Who Are You Again? Developer Guide",
+        "whoareyouagain-developer-guide": "WhoAreYouAgain? Developer Guide",
         "acknowledgements": "Acknowledgements",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
@@ -124,7 +124,7 @@
       "src": "UserGuide.md",
       "title": "User Guide",
       "headings": {
-        "ab-3-user-guide": "AB-3 User Guide",
+        "whoareyouagain-user-guide": "WhoAreYouAgain? User Guide",
         "quick-start": "Quick start",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
@@ -132,7 +132,7 @@
         "listing-all-persons-list": "Listing all persons : list",
         "editing-a-person-edit": "Editing a person : edit",
         "locating-persons-by-name-find": "Locating persons by name: find",
-        "deleting-a-person-delete": "Deleting a person : delete",
+        "deleting-a-person-delete": "Deleting a person: delete",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
         "saving-the-data": "Saving the data",
@@ -148,7 +148,7 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "whoareyouagain-never-forget-who-s-who-again": "WhoAreYouAgain? – Never Forget Who’s Who Again!"
       },
       "headingKeywords": {}
     },
