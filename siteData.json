@@ -80,7 +80,8 @@
         "extensions-7": "Extensions:",
         "use-case-8-auntie-name-translator": "Use Case 8: Auntie Name Translator",
         "main-success-scenario-mss-8": "Main Success Scenario (MSS):",
-        "extensions-8": "Extensions:"
+        "extensions-8": "Extensions:",
+        "non-functional-requirements": "Non-Functional Requirements"
       },
       "headingKeywords": {}
     },
