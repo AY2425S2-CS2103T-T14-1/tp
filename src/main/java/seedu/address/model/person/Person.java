@@ -67,15 +67,26 @@ public class Person {
     public Optional<Birthday> getBirthday() {
         return birthday;
     }
+    public String getBirthdayValue() {
+        return birthday.map(Object::toString).orElse("");
+    }
     public Optional<Relationship> getRelationship() {
         return relationship;
     }
-
+    public String getRelationshipValue() {
+        return relationship.map(Object::toString).orElse("");
+    }
     public Optional<Nickname> getNickname() {
         return nickname;
     }
+    public String getNicknameValue() {
+        return nickname.map(Object::toString).orElse("");
+    }
     public Optional<Notes> getNotes() {
         return notes;
+    }
+    public String getNotesValue() {
+        return notes.map(Object::toString).orElse("");
     }
 
     /**
