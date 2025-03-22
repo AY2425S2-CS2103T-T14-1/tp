@@ -15,7 +15,8 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command implements ConfirmableCommand {
+
+public class DeleteCommand extends UndoableCommand implements ConfirmableCommand {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -31,7 +32,11 @@ public class DeleteCommand extends Command implements ConfirmableCommand {
 
     public static final String MESSAGE_CONFIRM_DELETE = "Confirm Deleting Person: %1$s ? (y/n)";
 
+    public static final String MESSAGE_ABORTED = "Aborted deletion!";
+
     private final List<Index> targetIndices;
+
+    private List<Person> personsToDelete;
 
     public DeleteCommand(List<Index> targetIndices) {
         this.targetIndices = targetIndices;
@@ -48,7 +53,7 @@ public class DeleteCommand extends Command implements ConfirmableCommand {
             }
         }
 
-        List<Person> personsToDelete = targetIndices.stream()
+        personsToDelete = targetIndices.stream()
                 .map(targetIndex -> lastShownList.get(targetIndex.getZeroBased()))
                 .toList();
 
@@ -56,6 +61,28 @@ public class DeleteCommand extends Command implements ConfirmableCommand {
                 personsToDelete.stream()
                         .map(person -> person.getName().toString())
                         .collect(Collectors.joining(", "))), this);
+    }
+
+    @Override
+    public void undo(Model model) {
+        requireNonNull(model);
+        if (personsToDelete != null) {
+            for (Person person : personsToDelete) {
+                if (!model.hasPerson(person)) {
+                    model.addPerson(person);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void redo(Model model) {
+        requireNonNull(model);
+        if (personsToDelete != null) {
+            for (Person person : personsToDelete) {
+                model.deletePerson(person);
+            }
+        }
     }
 
     @Override
@@ -113,6 +140,6 @@ public class DeleteCommand extends Command implements ConfirmableCommand {
     }
 
     public CommandResult executeAborted() {
-        return new CommandResult("Aborted deletion");
+        return new CommandResult(MESSAGE_ABORTED);
     }
 }
