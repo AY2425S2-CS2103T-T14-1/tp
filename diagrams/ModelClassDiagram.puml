@@ -19,6 +19,10 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Birthday
+Class Relationship
+Class Nickname
+Class Notes
 
 Class I #FFFFFF
 }
@@ -42,6 +46,12 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> "0..1" Birthday
+Person *--> "0..1" Relationship
+Person *--> "0..1" Nickname
+Person *--> "0..1" Notes
+
+
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
