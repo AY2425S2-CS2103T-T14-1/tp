@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
+participant ":ListCommand" as ListCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list s/asc")
+activate LogicManager
+
+note over LogicManager, ListCommand
+This sequence also applies to:
+"list" (default insertion order)
+"list s/desc" (descending sort)
+Only the sortOrder value is passed and ListCommand created changes accordingly.
+end note
+
+LogicManager -> AddressBookParser : parseCommand("list s/asc")
+activate AddressBookParser
+
+create ListCommandParser
+AddressBookParser -> ListCommandParser
+
+activate ListCommandParser
+ListCommandParser --> AddressBookParser : ListCommandParser : return
+deactivate ListCommandParser
+
+AddressBookParser -> ListCommandParser : parse("list s/asc")
+activate ListCommandParser
+
+create ListCommand
+ListCommandParser -> ListCommand : new ListCommand(SortOrder.ASCENDING)
+activate ListCommand
+ListCommand --> ListCommandParser : ListCommand : return
+deactivate ListCommand
+
+ListCommandParser --> AddressBookParser : ListCommand : return
+deactivate ListCommandParser
+
+AddressBookParser --> LogicManager : ListCommand : return
+deactivate AddressBookParser
+
+LogicManager -> ListCommand : execute(Model)
+activate ListCommand
+
+ListCommand -> Model : updateFilteredPersonList()
+activate Model
+Model --> ListCommand : return
+deactivate Model
+
+ListCommand -> Model : sortFilteredPersonList(SortOrder.ASCENDING)
+activate Model
+Model --> ListCommand : return
+deactivate Model
+
+create CommandResult
+ListCommand -> CommandResult : new CommandResult(successMessage)
+activate CommandResult
+CommandResult --> ListCommand : CommandResult : return
+deactivate CommandResult
+
+ListCommand --> LogicManager : CommandResult : return
+deactivate ListCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
