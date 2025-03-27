@@ -18,4 +18,8 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> "0..1" Birthday
+Person *--> "0..1" Relationship
+Person *--> "0..1" Nickname
+Person *--> "0..1" Notes
 @enduml
