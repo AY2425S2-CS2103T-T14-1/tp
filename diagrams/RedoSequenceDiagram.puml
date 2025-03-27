@@ -5,8 +5,8 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":UndoCommandParser" as UndoCommandParser LOGIC_COLOR
-participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+participant ":RedoCommandParser" as RedoCommandParser LOGIC_COLOR
+participant "u:RedoCommand" as UndoCommand LOGIC_COLOR
 participant ":CommandTracker" as CommandTracker LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
@@ -16,34 +16,34 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("undo")
+[-> LogicManager : execute("redo")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("undo")
+LogicManager -> AddressBookParser : parseCommand("redo")
 activate AddressBookParser
 
-create UndoCommandParser
-AddressBookParser -> UndoCommandParser
-activate UndoCommandParser
+create RedoCommandParser
+AddressBookParser -> RedoCommandParser
+activate RedoCommandParser
 
-UndoCommandParser --> AddressBookParser
-deactivate UndoCommandParser
+RedoCommandParser --> AddressBookParser
+deactivate RedoCommandParser
 
-AddressBookParser -> UndoCommandParser : parse()
-activate UndoCommandParser
+AddressBookParser -> RedoCommandParser : parse()
+activate RedoCommandParser
 
 create UndoCommand
-UndoCommandParser -> UndoCommand
+RedoCommandParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> UndoCommandParser :
+UndoCommand --> RedoCommandParser :
 deactivate UndoCommand
 
-UndoCommandParser --> AddressBookParser : u
-deactivate UndoCommandParser
+RedoCommandParser --> AddressBookParser : u
+deactivate RedoCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-UndoCommandParser -[hidden]-> AddressBookParser
-destroy UndoCommandParser
+RedoCommandParser -[hidden]-> AddressBookParser
+destroy RedoCommandParser
 
 AddressBookParser --> LogicManager : u
 deactivate AddressBookParser
@@ -51,16 +51,16 @@ deactivate AddressBookParser
 LogicManager -> UndoCommand : execute(m)
 activate UndoCommand
 
-UndoCommand -> CommandTracker : popUndo()
+UndoCommand -> CommandTracker : popRedo()
 activate CommandTracker
 
 CommandTracker --> UndoCommand : lastCommand (DeleteCommand)
 deactivate CommandTracker
 
-UndoCommand -> DeleteCommand : undo(m)
+UndoCommand -> DeleteCommand : redo(m)
 activate DeleteCommand
 
-DeleteCommand -> Model : addPerson()
+DeleteCommand -> Model : deletePerson()
 activate Model
 
 Model --> DeleteCommand

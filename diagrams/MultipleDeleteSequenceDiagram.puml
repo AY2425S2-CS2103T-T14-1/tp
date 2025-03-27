@@ -16,11 +16,10 @@ participant "m:Model" as Model MODEL_COLOR
 end box
 
 '== Initial user input: "delete 1" =='
-
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete 1 2 3")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("delete 1 2 3")
 activate AddressBookParser
 
 create DeleteCommandParser
@@ -30,7 +29,7 @@ activate DeleteCommandParser
 DeleteCommandParser --> AddressBookParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+AddressBookParser -> DeleteCommandParser : parse("1 2 3")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -42,7 +41,7 @@ deactivate DeleteCommand
 
 DeleteCommandParser --> AddressBookParser : d
 deactivate DeleteCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.'
+'Hidden arrow to position the destroy marker below the end of the activation bar.
 DeleteCommandParser -[hidden]-> AddressBookParser
 destroy DeleteCommandParser
 
@@ -52,7 +51,7 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-' This returns a CommandResult that requires confirmation'
+' This returns a CommandResult that requires confirmation
 create CommandResult
 DeleteCommand -> CommandResult : new CommandResult(toBeConfirmed = true)
 activate CommandResult
@@ -79,11 +78,13 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : executeConfirmed(m)
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+loop [for id in [1, 2, 3]
+DeleteCommand -> Model : deletePerson(id)
 activate Model
 
 Model --> DeleteCommand
 deactivate Model
+end loop
 
 create CommandResult
 DeleteCommand -> CommandResult
