@@ -6,6 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Helper functions for handling strings.
@@ -65,4 +67,92 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Computes a refined similarity index between two strings.
+     * Combines multiple factors for more accuracy.
+     *
+     * @param a First string
+     * @param b Second string
+     * @return Similarity index between 0.0 (completely dissimilar) and 1.0 (identical)
+     */
+    public static double calculateSimilarity(String a, String b) {
+        if (a == null || b == null || a.isEmpty() || b.isEmpty()) {
+            return 0.0;
+        }
+
+        // 1. Levenshtein Distance Contribution
+        int distance = levenshteinDistance(a, b);
+        double maxLength = Math.max(a.length(), b.length());
+        double editDistanceScore = 1 - (double) distance / maxLength; // Normalized to [0, 1]
+
+        // 2. Overlap Score (based on common substrings)
+        double overlapScore = computeOverlapScore(a, b);
+
+        // 3. Length Ratio Score (penalizes large length differences)
+        double lengthRatioScore = computeLengthRatioScore(a, b);
+
+        // Combine the scores
+        double similarityIndex = (0.6 * editDistanceScore) + (0.3 * overlapScore) + (0.1 * lengthRatioScore);
+
+        return similarityIndex;
+    }
+
+    /**
+     * Computes the Levenshtein distance (edit distance) between two strings.
+     */
+    private static int levenshteinDistance(String a, String b) {
+        int[][] dp = new int[a.length() + 1][b.length() + 1];
+
+        for (int i = 0; i <= a.length(); i++) {
+            for (int j = 0; j <= b.length(); j++) {
+                if (i == 0) {
+                    dp[i][j] = j;
+                } else if (j == 0) {
+                    dp[i][j] = i;
+                } else {
+                    dp[i][j] = Math.min(dp[i - 1][j - 1] + (a.charAt(i - 1) == b.charAt(j - 1) ? 0 : 1),
+                            Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1));
+                }
+            }
+        }
+        return dp[a.length()][b.length()];
+    }
+
+    /**
+     * Compute substring overlap score, measuring the proportion of characters in common.
+     */
+    private static double computeOverlapScore(String a, String b) {
+        Set<Character> setA = new HashSet<>();
+        for (char c : a.toCharArray()) {
+            setA.add(c);
+        }
+
+        Set<Character> setB = new HashSet<>();
+        for (char c : b.toCharArray()) {
+            setB.add(c);
+        }
+
+        // Calculate intersection and union of character sets
+        Set<Character> intersection = new HashSet<>(setA);
+        intersection.retainAll(setB);
+
+        Set<Character> union = new HashSet<>(setA);
+        union.addAll(setB);
+
+        // Return the overlap score as intersection size divided by union size
+        return (double) intersection.size() / union.size();
+    }
+
+    /**
+     * Compute the length-based similarity score, penalizing large differences in length.
+     */
+    private static double computeLengthRatioScore(String a, String b) {
+        double lengthA = a.length();
+        double lengthB = b.length();
+        return Math.min(lengthA, lengthB) / Math.max(lengthA, lengthB);
+    }
+
+
+
 }

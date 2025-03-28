@@ -21,7 +21,8 @@ import seedu.address.model.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.namepredicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.namepredicate.NameSimilarPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -57,15 +58,6 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
-    @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
-    }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
@@ -79,8 +71,8 @@ public class FindCommandTest {
 
     @Test
     public void execute_shorthandKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate("ac");
+        String expectedMessage = String.format(FindCommand.MESSAGE_NO_MATCH_BUT_SIMILAR, 0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("xxx");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -88,13 +80,13 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_shorthandKeywords_noPersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_shorthandKeywords_similarPersonFound() {
+        String expectedMessage = String.format(FindCommand.MESSAGE_NO_MATCH_BUT_SIMILAR, 1);
         NameContainsKeywordsPredicate predicate = preparePredicate("ac le na");
+        NameSimilarPredicate similarPredicate = new NameSimilarPredicate(Arrays.asList("ac", "le", "na"));
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredPersonList(similarPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test

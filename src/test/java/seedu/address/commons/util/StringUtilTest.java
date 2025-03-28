@@ -140,4 +140,111 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void calculateSimilarity_similarStrings_returnsTrue() {
+        String[] x = getSimilarStringsX();
+        String[] y = getSimilarStringsY();
+        for (int i = 0; i < x.length; i++) {
+            double similarity = StringUtil.calculateSimilarity(x[i], y[i]);
+            if (similarity < 0.6) {
+                assertTrue(false, "Test failed! Similarity: " + similarity);
+            }
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    public void calculateSimilarity_differentStrings_returnsFalse() {
+        String[] x = getDifferentStringsX();
+        String[] y = getDifferentStringsY();
+        for (int i = 0; i < x.length; i++) {
+            double similarity = StringUtil.calculateSimilarity(x[i], y[i]);
+            if (similarity >= 0.6) {
+                assertTrue(false, "Test failed! Too high similarity, similarity: " + similarity);
+            }
+        }
+        assertTrue(true);
+    }
+
+    public static String[] getSimilarStringsX() {
+        return new String[]{
+            "apple",
+            "Mickie",
+            "teh",
+            "accomodate",
+            "recieve",
+            "wierd",
+            "separate",
+            "occurrence",
+            "maintenance",
+            "liaison",
+            "embarrass",
+            "conscience",
+            "indispensable",
+            "millenium",
+            "supercede",
+            "definitely",
+            "argument",
+            "calendar",
+            "refered",
+            "occurrance"
+        };
+    }
+
+    public static String[] getSimilarStringsY() {
+        return new String[]{
+            "apply",
+            "Micky",
+            "the",
+            "accommodate",
+            "receive",
+            "weird",
+            "seperate",
+            "occurence",
+            "maintainance",
+            "liason",
+            "embarass",
+            "concience",
+            "indespensible",
+            "millennium",
+            "supersede",
+            "definately",
+            "arguement",
+            "calender",
+            "referred",
+            "occurrence"
+        };
+    }
+
+    public static String[] getDifferentStringsX() {
+        return new String[]{
+            "apple",
+            "house",
+            "computer",
+            "ocean",
+            "mountain",
+            "elephant",
+            "jazz",
+            "bicycle",
+            "rainbow",
+            "galaxy"
+        };
+    }
+
+    public static String[] getDifferentStringsY() {
+        return new String[]{
+            "zebra",
+            "river",
+            "telephone",
+            "desert",
+            "valley",
+            "mosquito",
+            "rock",
+            "motorcycle",
+            "thunder",
+            "nebula"
+        };
+    }
+
+
 }
