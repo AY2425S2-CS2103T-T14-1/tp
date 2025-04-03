@@ -7,10 +7,12 @@ skinparam classBackgroundColor MODEL_COLOR
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nReadOnlyCommandHistory" as ReadOnlyCommandHistory
 Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+Class CommandHistory
 
 Class UniquePersonList
 Class Person
@@ -35,16 +37,19 @@ AddressBook .up.|> ReadOnlyAddressBook
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+Model .right.> ReadOnlyCommandHistory
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -right-> "1" CommandHistory
 UserPrefs .up.|> ReadOnlyUserPrefs
+CommandHistory .up.|> ReadOnlyCommandHistory
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "0..1" Phone
+Person *--> "0..1" Email
+Person *--> "0..1" Address
 Person *--> "*" Tag
 Person *--> "0..1" Birthday
 Person *--> "0..1" Relationship
