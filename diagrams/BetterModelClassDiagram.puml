@@ -14,12 +14,12 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "0..1" Birthday
-Person *--> "0..1" Relationship
-Person *--> "0..1" Nickname
-Person *--> "0..1" Notes
+Person *---> Name
+Person *---> "0..1" Phone
+Person *---> "0..1" Email
+Person *---> "0..1" Address
+Person *---> "0..1" Birthday
+Person *---> "0..1" Relationship
+Person *---> "0..1" Nickname
+Person *---> "0..1" Notes
 @enduml
