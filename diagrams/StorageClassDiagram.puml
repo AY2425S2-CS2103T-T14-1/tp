@@ -3,41 +3,66 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
+skinparam classBorderColor STORAGE_COLOR
+skinparam classStereotypeFontColor #000000
 
 package Storage as StoragePackage {
-
-package "UserPrefs Storage" #F4F6F6{
+Class StorageManager
+Interface "<<interface>>\nStorage" as Storage
+Interface "<<interface>>\nJsonSerializable<T>" as JsonSerializable
+Abstract Class "{abstract}\nJsonStorage<T, S extends JsonSerializable<T>>" as JsonStorage
+Abstract Class "{abstract}\nJsonStorage<ReadOnlyCommandHistory, JsonSerializableCommandHistory>" as JsonStorageCommandHistory
+Abstract Class "{abstract}\nJsonStorage<ReadOnlyAddressBook, JsonSerializableAddressBook>" as JsonStorageAddressBook
+package "UserPrefs Storage" #F4F6F6 {
 Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
 Class JsonUserPrefsStorage
 }
 
-Class "<<interface>>\nStorage" as Storage
-Class StorageManager
-
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
+package "AddressBook Storage" #F4F6F6 {
+Interface "<<interface>>\nAddressBookStorage" as AddressBookStorage
+Interface "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
 }
 
+package "CommandHistory Storage" #F4F6F6 {
+Interface "<<interface>>\nCommandHistoryStorage" as CommandHistoryStorage
+Interface "<<interface>>\nReadOnlyCommandHistory" as ReadOnlyCommandHistory
+Class JsonCommandHistoryStorage
+Class JsonSerializableCommandHistory
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Storage
+}
 
-StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+Class HiddenOutside #FFFFFF;line:transparent
+HiddenOutside .down.> Storage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+StorageManager .up..|> Storage
+StorageManager ---> "1" UserPrefsStorage
+StorageManager ---> "1" AddressBookStorage
+StorageManager ---> "1" CommandHistoryStorage
 
+Storage --|> UserPrefsStorage
+Storage --|> AddressBookStorage
+Storage --|> CommandHistoryStorage
+
+JsonStorageAddressBook ..> JsonStorage
+JsonStorageCommandHistory ..> JsonStorage
+JsonStorage ..> JsonSerializable
 JsonUserPrefsStorage .up.|> UserPrefsStorage
+
 JsonAddressBookStorage .up.|> AddressBookStorage
+JsonAddressBookStorage -down-|> JsonStorageAddressBook
+JsonAddressBookStorage .right.> ReadOnlyAddressBook
 JsonAddressBookStorage ..> JsonSerializableAddressBook
+
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 
+JsonCommandHistoryStorage ---|> JsonStorageCommandHistory
+JsonCommandHistoryStorage .up.|> CommandHistoryStorage
+JsonCommandHistoryStorage .left.> ReadOnlyCommandHistory
+JsonCommandHistoryStorage .down.> JsonSerializableCommandHistory
 @enduml
