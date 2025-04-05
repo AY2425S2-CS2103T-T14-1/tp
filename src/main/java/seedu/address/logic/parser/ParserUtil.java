@@ -101,6 +101,7 @@ public class ParserUtil {
         }
         String trimmedPhone = phone.get().trim();
         try {
+            trimmedPhone = slashEscapeRemover(trimmedPhone);
             Phone.isValidPhone(trimmedPhone);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());

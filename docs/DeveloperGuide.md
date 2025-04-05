@@ -68,7 +68,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S2-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -85,7 +85,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S2-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -118,7 +118,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
@@ -142,7 +142,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S2-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" />
 
@@ -620,6 +620,24 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: undo or redo repeatedly after no more history <br>
     Expected: Error message "Nothing to undo!" or "Nothing to redo!" displayed.
+
+### Command History
+
+1. Navigating command history
+
+    1. Prerequisites: At least two different commands (e.g., list, find Alice) have been executed.
+
+    1. Test case: Press Up arrow key after entering a command<br>
+    Expected: Previous command appears in command box.
+
+    2. Test case: Press Down arrow key after pressing Up arrow key multiple times<br>
+    Expected: More recent command appears in command box.
+
+    3. Test case: Enter both valid and invalid commands, then use Up/Down keys<br>
+    Expected: All commands (valid and invalid) are accessible in history. Invalid commands don't clear the command box.
+
+    4. Other scenarios to try: Navigate to oldest command and press Up again, navigate to most recent command and press Down<br>
+    Expected: No change when pressing Up at the oldest command. The command box is cleared after pressing Down on the most recent command.
 
 ### Help and Exit
 
