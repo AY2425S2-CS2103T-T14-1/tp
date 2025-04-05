@@ -43,6 +43,7 @@ public class CommandBox extends UiPart<Region> {
     private void handleKeyPress(KeyEvent event) {
         String command;
 
+        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
         if (event.getCode() == KeyCode.UP && commandHistory.canNavigateBackward()) {
             command = commandHistory.getPreviousCommand();
         } else if (event.getCode() == KeyCode.DOWN && commandHistory.canNavigateForward()) {
@@ -75,12 +76,11 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
+            commandHistory.resetNavigation();
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
             commandHistory.setIndex(1);
-        } finally {
-            commandHistory.resetNavigation();
         }
     }
 
