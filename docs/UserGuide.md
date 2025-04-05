@@ -85,6 +85,16 @@
 ---
 ## 📥 Managing Contacts
 
+<box type="info" seamless>
+
+**Detecting Duplicate Persons:**<br>
+
+* The app detects duplicate persons based on a case-insensitive comparison of their names only.
+* E.g., `John Doe`, `john doe`, and `JOHN DOE` are all considered the same person.
+* If an `add` or `edit` command results in a duplicate person, the command would be rejected with an error message.
+
+</box>
+
 ### Adding a person: `add`
 
 Adds a person to the address book.
@@ -117,6 +127,8 @@ E.g. To include <code>"s/o"</code> in a name, type it as <code>"s\/o"</code>
 <box type="tip" seamless>
 Mac Tip: Use <code>pwd</code> in terminal to get full working directory
 </box>
+
+<br>
 
 Examples:
 ```
@@ -191,6 +203,10 @@ Shows a list of all persons in the family book.
   <br>
   <img src="images/DistantBirthdays.png" alt="Ui" height="400px" width="550px"> <br>
     <br>
+  
+<box type="warning" seamless>
+When you edit a person's birthday while viewing a birthday-sorted list (`list s/asc` or `list s/desc`), the order of people in the list will update automatically based on the new birthday information. This might cause the edited person to appear in a different position in the list. Use `list` to restore the original order.
+</box>
 
 ---
 
@@ -216,8 +232,12 @@ Finds persons whose names match any of the given keywords. If no exact or partia
 **Examples:**
 * `find Jon` returns `John Doe`, `Jonathan Sim`, `Joni Tan`
 * `find alex david` returns `Alex Yeoh`, `David Li`  
-* `find Mich` returns `Mick`, `Mach` if there is no name 
+* `find Mich` returns `Mick`, `Mach` if there is no name
 </br>
+
+<box type="warning" seamless>
+When you edit a person's name while in a filtered view (after using `find`), the person card may disappear from the current view if their new name no longer matches the search criteria. Use `list` to see all contacts again.
+</box>
  
 
 ---
@@ -263,6 +283,17 @@ Shows a help window with guidance on using the app.
 Exits the program.
 
 **Format:** `exit`
+
+### Navigating the Command History
+The application keeps track of the past 100 commands you've previously entered, allowing you to easily recall and reuse them.
+
+**Usage:**
+* Press the `Up` arrow key to access previous commands in reverse chronological order.
+* Press the `Down` arrow key to navigate forward through the command history.
+* Command history includes both valid and invalid commands.
+* When you reach the most recent command, pressing `Down` will clear the command box.
+
+This feature is particularly useful when you need to repeat commands with minor modifications or when you want to correct a previously entered command.
 
 ### Saving the data
 
