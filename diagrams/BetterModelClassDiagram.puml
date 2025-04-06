@@ -12,7 +12,7 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
 
-Person -up-> "*" Tag
+Person -up-> "0..10" Tag
 
 Person *---> Name
 Person *---> "0..1" Phone

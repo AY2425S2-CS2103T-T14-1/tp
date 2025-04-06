@@ -50,7 +50,7 @@ Person *--> Name
 Person *--> "0..1" Phone
 Person *--> "0..1" Email
 Person *--> "0..1" Address
-Person *--> "*" Tag
+Person *--> "0..10" Tag
 Person *--> "0..1" Birthday
 Person *--> "0..1" Relationship
 Person *--> "0..1" Nickname
