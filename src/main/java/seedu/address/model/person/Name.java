@@ -12,8 +12,8 @@ public class Name {
     public static final String MESSAGE_CONSTRAINTS_LENGTH = "Names can be at most " + MAX_LENGTH
             + " characters long";
     public static final String MESSAGE_CONSTRAINTS_CHARACTERS =
-            "Names should not have consecutive special characters, end with a special character "
-                    + "and must start with a letter";
+            "Names can only contain letters, numbers, spaces and allowed special characters"
+            + "\nAllowed special characters: @  .  ,  !  '  /  -";
     public static final String MESSAGE_CONSTRAINTS_START_END = "Names cannot start or end with a special character.";
     public static final String MESSAGE_CONSTRAINTS_LETTER_START = "Names must start with a letter.";
     /*
