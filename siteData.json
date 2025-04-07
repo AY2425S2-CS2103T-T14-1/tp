@@ -78,6 +78,7 @@
         "clear-persons": "Clear persons",
         "finding-persons": "Finding persons",
         "undo-and-redo": "Undo and Redo",
+        "command-history": "Command History",
         "help-and-exit": "Help and Exit",
         "saving-data": "Saving data"
       },
