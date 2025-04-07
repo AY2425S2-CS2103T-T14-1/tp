@@ -22,4 +22,5 @@ Person *---> "0..1" Birthday
 Person *---> "0..1" Relationship
 Person *---> "0..1" Nickname
 Person *---> "0..1" Notes
+Person *---> "0..1" ImagePath
 @enduml

@@ -25,6 +25,7 @@ Class Birthday
 Class Relationship
 Class Nickname
 Class Notes
+Class ImagePath
 
 Class I #FFFFFF
 }
@@ -46,7 +47,7 @@ CommandHistory .up.|> ReadOnlyCommandHistory
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
+Person *--> "1" Name
 Person *--> "0..1" Phone
 Person *--> "0..1" Email
 Person *--> "0..1" Address
@@ -55,6 +56,7 @@ Person *--> "0..1" Birthday
 Person *--> "0..1" Relationship
 Person *--> "0..1" Nickname
 Person *--> "0..1" Notes
+Person *--> "0..1" ImagePath
 
 
 
