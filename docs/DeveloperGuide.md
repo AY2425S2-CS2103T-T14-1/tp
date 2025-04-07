@@ -686,3 +686,16 @@ Team Size: 5
 
 1. Currently, the undo message for edit commands does not specify which field was reverted. 
 We plan to enhance the message to show the specific field and value changed to improve clarity for the user.
+
+2. Currently, the error message when a user inputs an undefined prefix, i.e. a prefix the app does not associate with a field, an 'invalid command format' error is raised. 
+This is too general. We plan to enhance the message to show the specific prefix which caused the error. This is so that the user
+can quickly identify the mistake in the command.
+
+3. Currently, the find feature is limited to finding by name. We plan to enhance the find feature to allow user to find persons
+through other fields such as relationship and nickname. This would make searching for a forgotten relative much easier and more likely to be successful.
+
+4. Currently, there is no feature that allows the user to edit tags or add to them without erasing all current tags.
+This makes tasks such as adding a tag to the current set of tags difficult. We plan to create a feature which allows users to
+edit or add tags without erasing all current tags.
+
+
