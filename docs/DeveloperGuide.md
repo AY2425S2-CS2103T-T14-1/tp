@@ -392,6 +392,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 # WhoAreYouAgain? - Use Cases
 
+<box type="info" seamless>
+<strong>Disclaimer:</strong> The system messages shown in these use cases are suggestions intended to illustrate expected outcomes and system feedback. Developers are free to modify the phrasing of these messages, as long as the underlying meaning and clarity are preserved.
+
+UI references (e.g. command input box, result display window, help window) are included to provide context for user interaction. These references are not prescriptive and may evolve as the user interface is updated or redesigned.
+</box>
+
 ## Use Case 1: Add Contact to Contact List
 **System**: WhoAreYouAgain?  
 **Use case**: UC01 - Add Contact <br>
