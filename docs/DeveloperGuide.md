@@ -206,27 +206,27 @@ Step 2: Adding a Person
 Step 3: Deleting a Person
 
 - Action:
-    - The user executes the ```delete``` command to delete the previously added person.
+    - The user executes the `delete` command to delete the previously added person.
     - ```delete <index>``` where `index` is the location John Doe is stored.
 
 - State:
     - The address book now no longer contains John Doe.
 
 - Behaviour:
-    - The ```delete command``` is executed and is reflected in the new address book state (without the deleted person).
+    - The `delete` command is executed and is reflected in the new address book state (without the deleted person).
     - ```CommandTracker.getInstance().push()``` is called to push this command to the undo stack.
         - This is allowed because the ```DeleteCommand``` extends ```UndoableCommand```.
-    - `undo` is still available to restore the deleted person, but `redo` is still not available since delete has not been undone yet.
+    - `undo` is still available to restore the deleted person, but `redo` is still not available since `delete` has not been undone yet.
 
 Step 4: Undoing the DeleteCommand
 
 <puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram" />
 
 - Action:
-    - The user decides to undo the delete command using the ```undo``` command.
+    - The user decides to undo the `delete` command using the ```undo``` command.
 
 - State:
-    - The address book is reverted to the state before the delete command, with John Doe restored.
+    - The address book is reverted to the state before the `delete` command, with John Doe restored.
 
 - Behaviour:
   - The ```undo``` command is called.
@@ -234,7 +234,7 @@ Step 4: Undoing the DeleteCommand
       - Since it can, ```CommandTracker.getInstance().popUndo()``` is called to pop the command from the undo stack.
       - Subsequently, this command is also pushed to the redo stack.
   - The ```DeleteCommand#redo``` method is invoked on the last ```delete``` command and restores the deleted person.
-  - `undo` is still available (for the initial ```add``` command) and `redo` is available since delete has been undone.
+  - `undo` is still available (for the initial `add` command) and `redo` is available since `delete` has been undone.
 
 Step 5: Redoing the DeleteCommand
 
@@ -251,7 +251,7 @@ Step 5: Redoing the DeleteCommand
     - ```CommandTracker.canRedo()``` is called to see if the command can be redone.
         - Since it can, ```CommandTracker.getInstance().popRedo()``` is called to pop the command from the redo stack.
     - The ```DeleteCommand#redo``` method is invoked on the last ```delete``` command and deletes the person again.
-    - `undo` is still available (for the initial ```add``` command) and `redo` is no longer available since delete has been redone.
+    - `undo` is still available (for the initial ```add``` command) and `redo` is no longer available since `delete` has been redone.
 
 **Note:** At this point, the user should be able to notice that the `undo` and `redo` commands can be called in a circular manner i.e. ```undo -> redo -> undo -> ...```
 
