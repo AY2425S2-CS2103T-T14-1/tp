@@ -186,7 +186,7 @@ Step 1: Initial Application Launch
   - The address book contains preloaded contacts.
 
 -  Behaviour:
-    - No undo or redo operations are available at this point since no changes have been made.
+    - No `undo` or `redo` operations are available at this point since no changes have been made.
 
 Step 2: Adding a Person
 
