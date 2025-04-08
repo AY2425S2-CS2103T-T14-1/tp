@@ -394,7 +394,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use Case 1: Add Contact to Contact List
 **System**: WhoAreYouAgain?  
-**Use case**: UC01 - Add Contact
+**Use case**: UC01 - Add Contact <br>
 **Actor**: User
 
 ### Main Success Scenario (MSS):
@@ -501,7 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 </br>
 
 - **1c. User inputs an incorrect command. (e.g. `find"nic"`)**
-    - 1c1. System displays a message: `Unknown command, try typing 'help' for assistance!`.
+    - 1c1. System displays a message: "Unknown command, try typing 'help' for assistance!".
     - Use case resumes from step 1 with valid `find` syntax.
 
 ---
@@ -519,7 +519,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Extensions:
 - **1a. User inputs an incorrect command. (e.g. `helpp`)**
-    - 1a1. System displays a message: `Unknown command, try typing 'help' for assistance!`.
+    - 1a1. System displays a message: "Unknown command, try typing 'help' for assistance!".
     - Use case resumes from step 1 with the correct command syntax for `help`.
 <br>
 </br>
@@ -745,7 +745,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Undo the last command
 
-    1. Prerequisites: At least one undoable command (e.g., add, edit, delete) has been executed.
+    1. Prerequisites: At least one supported command (e.g. add, edit, delete) has been executed.
 
     1. Test case: `undo`<br>
        Expected: Last change is reverted. Successful undo message shown.
@@ -755,7 +755,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `redo` <br>
       Expected: The previously undone change is re-applied. Successful redo message shown.
 
-1. Attempting `undo/redo` when nothing to undo/redo after an `UndoableCommand`
+1. Attempting `undo/redo` when nothing to undo/redo
 
     1. Test case: undo or redo repeatedly after no more history <br>
     Expected: Error message "Nothing to undo!" or "Nothing to redo!" displayed.
@@ -764,7 +764,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Navigating command history
 
-    1. Prerequisites: At least one command (e.g., list) has been executed.
+    1. Prerequisites: At least one command (e.g. list) has been executed.
 
     1. Test case: Press Up arrow key after entering a command<br>
     Expected: Previous command appears in command box.
